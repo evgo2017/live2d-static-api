@@ -1,0 +1,26 @@
+{
+  "name": "live2d-static-api",
+  "version": "1.0.0",
+  "author": "evgo2017 <evgo2017@qq.com>",
+  "description": "live2d static api",
+  "license": "MIT",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "homepage": "https://github.com/evgo2017/live2d-static-api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evgo2017/live2d-static-api.git"
+  },
+  "keywords": [
+    "live2d",
+    "live2d api",
+    "vue-live2d",
+    "api"
+  ],
+  "bugs": {
+    "url": "https://github.com/evgo2017/live2d-static-api/issues"
+  },
+  "private": false
+}
