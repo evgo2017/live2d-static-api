@@ -8,6 +8,12 @@
   "scripts": {
     "build": "node build.js"
   },
+  "files": [
+    "package.json",
+    "build.js",
+    "LICENSE",
+    "README.md"
+  ],
   "homepage": "https://github.com/evgo2017/live2d-static-api",
   "repository": {
     "type": "git",
