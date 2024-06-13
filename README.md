@@ -2,30 +2,44 @@
 
 ## 背景
 
-我的 [vue-live2d](https://github.com/evgo2017/vue-live2d) 项目，在 vue 中使用看板娘，切换模型和服装是直接调用 [live2d_api](https://github.com/fghrsh/live2d_api) 提供的 api。但因为一些不可抗力，api 提供的服务出现了问题，导致加载不到数据。
+[vue-live2d](https://github.com/evgo2017/vue-live2d) 之前通过调用 [live2d_api](https://github.com/fghrsh/live2d_api) 提供的 api 来加载模型，但该 api 出现了问题，导致长时间加载不到数据。
 
-所以我写了这个项目来代替  [live2d_api](https://github.com/fghrsh/live2d_api)  提供服务，同时提高 [vue-live2d](https://github.com/evgo2017/vue-live2d) 的易用。
+所以我写了这个项目来代替  [live2d_api](https://github.com/fghrsh/live2d_api)  ，同时提高 [vue-live2d](https://github.com/evgo2017/vue-live2d) 的易用。
 
 ## 介绍
 
-live2d-static-api 是一款静态 api，和静态博客类似。运行时只需要通过 http 能拿到静态文件即可，不需要部署复杂的环境。当前项目的 url 地址就是提供服务的一个途径。
+live2d-static-api 是一款静态 api，不需要部署复杂环境，只需要 web 服务（如 Nginx 等）即可。
+
+网站怎么部署，这个项目怎么部署。当前项目的 url 就已是一个 api 服务了。
 
 ### 1. 在线浏览效果
 
-在线 DEMO：https://evgo2017.com/repo/live2d-static-api
+在线 DEMO：https://evgo2017.com/repo/vue-live2d
 
-### 2. 使用
+### 2. API 地址
 
-#### 2.1 可直接使用的服务地址：
+#### 2.1 可直接使用的 api 地址：
 
 | 说明                | 服务地址                                                     |
 | ------------------- | ------------------------------------------------------------ |
-| 当前项目的 url 地址 | https://github.com/evgo2017/live2d-static-api/blob/master/indexes |
-| 我提供的服务地址    | https://evgo2017.com/api/live2d-static-api/indexes           |
+| 基于 Github 提供的 api 地址 | https://github.com/evgo2017/live2d-static-api/blob/master/indexes |
+| 我提供的 api 地址    | https://evgo2017.com/api/live2d-static-api/indexes           |
 
-#### 2.2 自行部署
+#### 2.2 自行部署 api
 
-将此项目直接放在服务器上，配置地址即可。
+在服务器（如 Nginx、IIS 等）上配置，等同部署网站。
+
+如 Nginx 的 `conf` 文件：
+```
+server {
+    location /api/live2d-static-api {
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'Content-Type';
+        alias /var/www/live2d-static-api;
+    }
+}
+```
 
 ### 3. 接口
 
@@ -99,7 +113,7 @@ $ node build.js fromBasePath=models toBasePath=indexes isCompress=false
 
 [1] https://github.com/fghrsh/live2d_api
 
-> [live2d_api](https://github.com/fghrsh/live2d_api) 使用的是 php，而我对 php 没什么经验（还懒得 docker 打个包），考虑过用 node 重写（还得部署服务），最后发现动态服务器不必要，静态服务器就解决问题了，完美。
+> [live2d_api](https://github.com/fghrsh/live2d_api) 使用的是 php，而我对 php 没什么经验（还得 docker 打个包），考虑过用 node 重写（还得部署服务），最后通过静态文件就解决问题了，完美。
 
 ## 版权
 
