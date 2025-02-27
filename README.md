@@ -1,35 +1,43 @@
 # live2d-static-api
 
-## 背景
+## 零、背景
 
 [vue-live2d](https://github.com/evgo2017/vue-live2d) 之前通过调用 [live2d_api](https://github.com/fghrsh/live2d_api) 提供的 api 来加载模型，但该 api 出现了问题，导致长时间加载不到数据。
 
 所以我写了这个项目来代替  [live2d_api](https://github.com/fghrsh/live2d_api)  ，同时提高 [vue-live2d](https://github.com/evgo2017/vue-live2d) 的易用。
 
-## 介绍
+## 一、效果预览
+
+在线 DEMO：https://vue-live2d.demo.evgo2017.com
+
+## 二、介绍
 
 live2d-static-api 是一款静态 api，不需要部署复杂环境，只需要 web 服务（如 Nginx 等）即可。
 
-网站怎么部署，这个项目怎么部署。当前项目的 url 就已是一个 api 服务了。
+原理和部署 Vue 项目相同，网站怎么部署，这个项目怎么部署。当前项目的 url 就已是一个 api 服务了。
 
-### 1. 在线浏览效果
+## 三、几种部署方案
 
-在线 DEMO：https://evgo2017.com/repo/vue-live2d
+#### 第一种 放在项目的静态文件夹内
 
-### 2. API 地址
+如 Vue 项目的 public 文件夹内，这样就同网站一起部署了，[在线 DEMO](https://vue-live2d.demo.evgo2017.com) 就采用的这种方式
 
-#### 2.1 可直接使用的 api 地址：
+``` js
+apiPath="./live2d-static-api/indexes"
+```
 
-| 说明                | 服务地址                                                     |
-| ------------------- | ------------------------------------------------------------ |
-| 基于 Github 提供的 api 地址 | https://github.com/evgo2017/live2d-static-api/blob/master/indexes |
-| 我提供的 api 地址    | https://evgo2017.com/api/live2d-static-api/indexes           |
+![apiPath](https://github.com/evgo2017/live2d-static-api/raw/master/public/apiPath.png)
 
-#### 2.2 自行部署 api
+#### 第二种 基于 Github 提供的 api 地址
 
-在服务器（如 Nginx、IIS 等）上配置，等同部署网站。
+``` js
+apiPath="https://raw.githubusercontent.com/evgo2017/live2d-static-api/refs/heads/main/indexes"
+```
 
-如 Nginx 的 `conf` 文件：
+#### 第三种 在服务器自行部署 api
+
+如 Nginx 的 `conf` 文件，再 `apiPath` 填写对应的地址：
+
 ```
 server {
     location /api/live2d-static-api {
@@ -41,7 +49,7 @@ server {
 }
 ```
 
-### 3. 接口
+## 四、接口
 
 接口使用请参考 [vue-live2d](https://github.com/evgo2017/vue-live2d)。
 
@@ -51,7 +59,7 @@ server {
 | /indexes/\<modelPath\>/textures.json            | 获得模型的服装索引 | modelPath 值从模型索引文件取得                               |
 | /indexes/\<modelPath\>/\<modelTexturesId\>.json | 获得模型的特定配置 | modelTexturesId 值从服装索引文件取得，默认为 default；这也是模型最终要加载的文件 |
 
-### 4. 文件结构
+## 五、文件夹结构
 
 ```
 ├─indexes // 索引文件夹，每次 build 完全重建
